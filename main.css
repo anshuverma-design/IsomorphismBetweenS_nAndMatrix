@@ -1,0 +1,1707 @@
+ 
+/* Enhanced CSS for Mathematical Content - start css.sty */
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:wght@400;700&family=Montserrat:wght@300;400;500;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Define CSS Variables for easy theming */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --heading-color: #2c3e50;
+  --link-color: #3498db;
+  --link-hover-color: #2980b9;
+  --accent-color: #e74c3c;
+  --secondary-color: #2ecc71;
+  --tertiary-color: #9b59b6;
+  --border-color: #ecf0f1;
+  --code-bg: #f8f9fa;
+  --table-border: #dfe2e5;
+  --table-bg: #ffffff;
+  --table-bg-alt: #f8f9fa;
+  --box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  --box-shadow-hover: 0 5px 15px rgba(0,0,0,0.15);
+  --transition-speed: 0.3s;
+  --transition-speed-slow: 0.5s;
+  --transition-speed-fast: 0.2s;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --doodle-color-1: #3498db;
+  --doodle-color-2: #e74c3c;
+  --doodle-color-3: #2ecc71;
+  --doodle-color-4: #f39c12;
+  --doodle-color-5: #9b59b6;
+}
+
+/* Dark mode variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --heading-color: #e0e0e0;
+    --link-color: #61afef;
+    --link-hover-color: #8cc2f0;
+    --accent-color: #e06c75;
+    --secondary-color: #98c379;
+    --tertiary-color: #c678dd;
+    --border-color: #3e4451;
+    --code-bg: #282c34;
+    --table-border: #3e4451;
+    --table-bg: #21252b;
+    --table-bg-alt: #282c34;
+    --box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    --box-shadow-hover: 0 5px 15px rgba(0,0,0,0.4);
+  }
+  img[src^="main"] {
+    filter: invert(1);
+  }
+}
+
+.cmmi-7{font-size:70%;font-style: italic; font-family: 'Noto Serif', serif;}
+.cmmi-10{font-style: italic; font-family: 'Noto Serif', serif;}
+.cmr-17{font-size:170%; font-family: 'Noto Serif', serif;}
+.cmr-12{font-size:120%; font-family: 'Noto Serif', serif;}
+.cmbx-10{font-weight: bold; font-family: 'Noto Serif', serif;}
+.cmti-10{font-style: italic; font-family: 'Noto Serif', serif;}
+
+p {
+  margin-top:0;
+  margin-bottom:0;
+  line-height: 1.6;
+  font-family: 'Noto Sans', sans-serif;
+}
+p.indent{text-indent:0;}
+p + p{margin-top:1em;}
+p + div, p + pre {margin-top:1em;}
+div + p, pre + p {margin-top:1em;}
+
+/* Enhanced link styling with animations */
+a { 
+  overflow-wrap: break-word; 
+  word-wrap: break-word; 
+  word-break: break-word; 
+  hyphens: auto; 
+  color: var(--link-color);
+  text-decoration: none;
+  position: relative;
+  transition: color var(--transition-speed) ease;
+}
+
+/* Animated underline effect for links */
+a:not(.partToc a):not(.likepartToc a):not([id])::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--link-hover-color);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform var(--transition-speed) ease;
+}
+
+a:not(.partToc a):not(.likepartToc a):not([id]):hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+a:hover {
+  color: var(--link-hover-color);
+  text-decoration: none;
+}
+
+/* Special styling for external links */
+a[href^="http"]::before {
+  content: '↗';
+  display: inline-block;
+  margin-right: 3px;
+  font-size: 0.8em;
+  transform: translateY(-2px);
+  opacity: 0.7;
+  transition: transform var(--transition-speed-fast) ease, opacity var(--transition-speed-fast) ease;
+}
+
+a[href^="http"]:hover::before {
+  transform: translateY(-4px);
+  opacity: 1;
+}
+
+/* Button-like links */
+a.button {
+  display: inline-block;
+  padding: 0.5em 1.2em;
+  background-color: var(--link-color);
+  color: white;
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  position: relative;
+  overflow: hidden;
+}
+
+a.button:hover {
+  background-color: var(--link-hover-color);
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-hover);
+  text-decoration: none;
+}
+
+/* Ripple effect for button-like links */
+a.button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+a.button:active::after {
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0) translate(-50%, -50%);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25) translate(-50%, -50%);
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40) translate(-50%, -50%);
+  }
+}
+
+@media print {div.crosslinks {visibility:hidden;}}
+
+table.tabular {
+  border-collapse: collapse; 
+  border-spacing: 0;
+  margin: 1.5em 0;
+  box-shadow: var(--box-shadow);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+a img { border-top: 0; border-left: 0; border-right: 0; }
+
+center { margin-top:1em; margin-bottom:1em; }
+td center { margin-top:0em; margin-bottom:0em; }
+
+.Canvas { position:relative; }
+
+img.math{vertical-align:middle;}
+
+div.par-math-display, div.math-display {
+  text-align:center;
+  margin: 1.5em 0;
+  padding: 0.5em;
+  overflow-x: auto;
+}
+
+/* Page background with mathematical doodles */
+body { 
+  margin: 2em auto; 
+  max-width: 80ch; 
+  padding: 0 1.5em; 
+  background-color: var(--bg-color);
+  background-image: 
+    radial-gradient(var(--border-color) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' opacity='0.03'%3E%3Ctext x='10' y='30' font-family='serif' font-size='15' fill='%233498db'%3E∑%3C/text%3E%3Ctext x='70' y='20' font-family='serif' font-size='12' fill='%23e74c3c'%3E∫%3C/text%3E%3Ctext x='40' y='80' font-family='serif' font-size='18' fill='%232ecc71'%3E∏%3C/text%3E%3Ctext x='65' y='65' font-family='serif' font-size='14' fill='%239b59b6'%3Eλ%3C/text%3E%3Ctext x='25' y='55' font-family='serif' font-size='16' fill='%23f39c12'%3E∞%3C/text%3E%3C/svg%3E");
+  background-size: 50px 50px, 200px 200px;
+  color: var(--text-color);
+  color-scheme: light dark;
+  font-family: 'Noto Sans', sans-serif;
+  line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+  animation: fadeInPage 1s ease-in-out;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+/* Add decorative math symbols to the corners of the page */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  z-index: -1;
+  opacity: 0.03;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+body::before {
+  top: 0;
+  left: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cpath d='M50,50 Q150,20 250,50 T450,50' stroke='%233498db' stroke-width='2' fill='none'/%3E%3Ctext x='80' y='100' font-family='serif' font-size='40' fill='%233498db'%3E∑%3C/text%3E%3Ctext x='150' y='150' font-family='serif' font-size='60' fill='%23e74c3c'%3E∫%3C/text%3E%3Ctext x='100' y='200' font-family='serif' font-size='50' fill='%232ecc71'%3E∏%3C/text%3E%3C/svg%3E");
+  transform: rotate(-5deg);
+}
+
+body::after {
+  bottom: 0;
+  right: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cpath d='M50,250 Q150,280 250,250 T450,250' stroke='%239b59b6' stroke-width='2' fill='none'/%3E%3Ctext x='120' y='100' font-family='serif' font-size='45' fill='%239b59b6'%3Eλ%3C/text%3E%3Ctext x='180' y='180' font-family='serif' font-size='55' fill='%23f39c12'%3E∞%3C/text%3E%3Ctext x='70' y='220' font-family='serif' font-size='40' fill='%233498db'%3E∂%3C/text%3E%3C/svg%3E");
+  transform: rotate(5deg);
+}
+
+/* Page load animation */
+@keyframes fadeInPage {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Decorative corner elements */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  z-index: -1;
+  opacity: 0.2;
+}
+
+body::before {
+  top: 0;
+  left: 0;
+  background: radial-gradient(circle at top left, var(--doodle-color-1), transparent 70%);
+  animation: pulsate 15s infinite alternate;
+}
+
+body::after {
+  bottom: 0;
+  right: 0;
+  background: radial-gradient(circle at bottom right, var(--doodle-color-3), transparent 70%);
+  animation: pulsate 15s infinite alternate-reverse;
+}
+
+@keyframes pulsate {
+  0% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.05); opacity: 0.3; }
+  100% { transform: scale(1); opacity: 0.2; }
+}
+
+/* Enhanced heading styles with decorative elements */
+h1, h2, h3, h4, h5 { 
+  line-height: 1.2; 
+  margin-top: 1.5em; 
+  margin-bottom: 0.5em; 
+  font-family: 'Montserrat', 'Noto Sans', sans-serif;
+  color: var(--heading-color);
+  position: relative;
+  transition: transform var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+/* Heading hover effect */
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover {
+  color: var(--accent-color);
+  transform: translateX(5px);
+}
+
+/* Decorative underline for headings */
+h1::after, h2::after, h3::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+  transition: width var(--transition-speed-slow) ease;
+  margin-top: 5px;
+  border-radius: 3px;
+}
+
+h1:hover::after, h2:hover::after, h3:hover::after {
+  width: 100px;
+}
+
+/* Special styling for h1 */
+h1 {
+  font-size: 2.2em;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Special styling for h2 */
+h2 {
+  font-size: 1.8em;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+/* Special styling for h3 */
+h3 {
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+/* Special styling for h4 */
+h4 {
+  font-size: 1.3em;
+  font-weight: 500;
+  color: var(--secondary-color);
+}
+
+/* Special styling for h5 */
+h5 {
+  font-size: 1.1em;
+  font-weight: 500;
+  color: var(--tertiary-color);
+}
+
+@media print { body { max-width:none } }
+
+.partHead, .likepartHead { 
+  font-size: 2em; 
+  position: relative;
+  padding-bottom: 0.3em;
+}
+
+.partHead::after, .likepartHead::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 3px;
+  background-color: var(--accent-color);
+  transition: width 0.3s ease;
+}
+
+.partHead:hover::after, .likepartHead:hover::after {
+  width: 150px;
+}
+
+.chapterHead, .likechapterHead { font-size: 1.7411em; }
+.sectionHead, .likesectionHead { font-size: 1.5157em; }
+.subsectionHead, .likesubsectionHead { font-size: 1.3195em; }
+.subsubsectionHead, .likesubsubsectionHead { font-size: 1.1487em; }
+
+/* List styling */
+li p.indent { text-indent: 0em }
+li p:first-child{ margin-top:0em; }
+li p:last-child, li div:last-child { margin-bottom:0.5em; }
+li p:first-child{ margin-bottom:0; }
+li p~ul:last-child, li p~ol:last-child{ margin-bottom:0.5em; }
+
+ul.itemize1, ol.enumerate1 {
+  padding-left: 0;
+  margin: 1em 0;
+}
+
+ul li.itemize, ol li.enumerate {
+  margin-left: 1.5rem;
+  margin-bottom: 0.5em;
+  position: relative;
+}
+
+ul li.itemize {
+  list-style-type: none;
+}
+
+ul li.itemize::before {
+  content: '•';
+  position: absolute;
+  left: -1.2em;
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+.enumerate1 {
+  list-style-type: decimal;
+  counter-reset: item;
+}
+
+.enumerate2 {list-style-type: lower-alpha;}
+.enumerate3 {list-style-type: lower-roman;}
+.enumerate4 {list-style-type: upper-alpha;}
+
+/* Theorem styling with animation */
+/* Theorem styling with enhanced decorative elements */
+.newtheorem {
+  margin: 2em 0;
+  padding: 1.2em 1.8em;
+  background-color: rgba(52, 152, 219, 0.08);
+  border-left: 4px solid var(--secondary-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color var(--transition-speed) ease;
+}
+
+/* Theorem hover and animation effects */
+.newtheorem:hover, .newtheorem.animate-in {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow-hover);
+  background-color: rgba(52, 152, 219, 0.12);
+}
+
+.newtheorem.animate-in {
+  animation: slideInTheorem 0.6s ease-out;
+}
+
+@keyframes slideInTheorem {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(-5px); }
+}
+
+/* Decorative corner for theorems */
+.newtheorem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 30px 30px 0;
+  border-color: transparent var(--secondary-color) transparent transparent;
+  opacity: 0.7;
+  transition: opacity var(--transition-speed) ease;
+}
+
+.newtheorem:hover::before {
+  opacity: 1;
+}
+
+/* Theorem title styling */
+.newtheorem .theoremHead {
+  font-weight: bold;
+  color: var(--heading-color);
+  margin-bottom: 0.8em;
+  font-size: 1.1em;
+  display: inline-block;
+  border-bottom: 2px solid var(--secondary-color);
+  padding-bottom: 3px;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-10px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Proof styling with enhanced decorative elements */
+.proof {
+  margin: 1.8em 0;
+  padding: 1.2em 1.8em 1.2em 2.5em;
+  background-color: rgba(46, 204, 113, 0.05);
+  border: 1px solid rgba(46, 204, 113, 0.2);
+  border-radius: var(--border-radius-md);
+  position: relative;
+  transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+/* Proof hover and animation effects */
+.proof:hover, .proof.animate-in {
+  background-color: rgba(46, 204, 113, 0.08);
+  transform: translateX(5px);
+}
+
+.proof.animate-in {
+  animation: slideInProof 0.6s ease-out;
+}
+
+@keyframes slideInProof {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(5px); }
+}
+
+/* Decorative element for proofs */
+.proof::before {
+  content: '⊢';
+  position: absolute;
+  left: 0.8em;
+  top: 1.2em;
+  font-size: 1.2em;
+  color: var(--secondary-color);
+  opacity: 0.7;
+  transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease;
+}
+
+.proof:hover::before {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+/* Proof title styling */
+.proof .proofHead {
+  font-weight: bold;
+  color: var(--secondary-color);
+  margin-bottom: 0.8em;
+  font-style: italic;
+}
+
+/* QED symbol styling */
+.proof .qed {
+  float: right;
+  font-size: 1.5em;
+  margin-top: 0.5em;
+  color: var(--secondary-color);
+  opacity: 0.8;
+  transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease;
+}
+
+.proof:hover .qed {
+  transform: rotate(90deg);
+  opacity: 1;
+}
+
+.obeylines-h, .obeylines-v {white-space: nowrap; }
+div.obeylines-v p { margin-top:0; margin-bottom:0; }
+
+.overline { 
+  text-decoration: overline; 
+  position: relative;
+}
+
+.overline img { border-top: 1px solid var(--text-color); }
+
+td.displaylines {text-align: center; white-space: nowrap;}
+.centerline {text-align: center;}
+.rightline {text-align: right;}
+
+pre.verbatim {
+  font-family: 'Roboto Mono', monospace; 
+  text-align: left; 
+  clear: both; 
+  background-color: var(--code-background);
+  padding: 1em;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
+/* Box styling */
+.fbox {
+  padding: 1em;
+  text-indent: 0pt;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: var(--box-shadow);
+  margin: 1.5em 0;
+  transition: box-shadow var(--transition-speed) ease;
+}
+
+.fbox:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+div.fbox {display: table;}
+
+div.center div.fbox {
+  text-align: center;
+  clear: both;
+  padding: 1em;
+  text-indent: 0pt;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+div.minipage {width: 100%;}
+
+/* Alignment classes */
+div.center, div.center div.center {
+  text-align: center;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+div.center div {text-align: left;}
+
+div.flushright, div.flushright div.flushright {text-align: right;}
+div.flushright div {text-align: left;}
+div.flushleft {text-align: left;}
+
+.underline {
+  text-decoration: underline;
+  text-decoration-color: var(--accent-color);
+  text-decoration-thickness: 1px;
+}
+
+.underline img {
+  border-bottom: 1px solid var(--text-color);
+  margin-bottom: 1pt;
+}
+
+/* Frame boxes with improved styling */
+.framebox-c, .framebox-l, .framebox-r {
+  padding: 1em;
+  text-indent: 0pt;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: var(--box-shadow);
+  margin: 1em 0;
+  transition: transform var(--transition-speed) ease;
+}
+
+.framebox-c:hover, .framebox-l:hover, .framebox-r:hover {
+  transform: translateY(-2px);
+}
+
+.framebox-c {text-align: center;}
+.framebox-l {text-align: left;}
+.framebox-r {text-align: right;}
+
+/* Superscript styling */
+span.thank-mark {
+  vertical-align: super;
+  color: var(--accent-color);
+}
+
+span.footnote-mark sup.textsuperscript,
+span.footnote-mark a sup.textsuperscript {
+  font-size: 80%;
+  color: var(--secondary-color);
+}
+
+/* Enhanced code styling with animations */
+code.verb {
+  font-family: 'Roboto Mono', monospace;
+  background-color: var(--code-bg);
+  padding: 0.2em 0.4em;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.9em;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  position: relative;
+  display: inline-block;
+}
+
+code.verb:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+/* Code block styling */
+pre.verbatim {
+  background-color: var(--code-bg);
+  padding: 1.2em 1.5em;
+  border-radius: var(--border-radius-md);
+  overflow-x: auto;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: var(--box-shadow);
+  margin: 1.5em 0;
+  position: relative;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+pre.verbatim:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow-hover);
+}
+
+/* Code block line numbers */
+pre.verbatim::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  border-right: 1px solid rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,0.03);
+  border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
+}
+
+/* Code block language indicator */
+pre.verbatim::after {
+  content: 'code';
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--accent-color);
+  color: white;
+  font-size: 0.7em;
+  padding: 0.2em 0.7em;
+  border-radius: 0 var(--border-radius-md) 0 var(--border-radius-sm);
+  opacity: 0.8;
+  font-family: 'Roboto Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Scroll to top button */
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease, background-color var(--transition-speed) ease;
+  box-shadow: var(--box-shadow);
+  z-index: 1000;
+}
+
+.scroll-to-top.visible {
+  opacity: 0.8;
+  transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+  opacity: 1;
+  background-color: var(--link-hover-color);
+}
+
+.scroll-to-top::before {
+  content: '↑';
+  font-size: 1.5em;
+}
+
+/* Enhanced table styling with decorative elements */
+div.tabular, div.center div.tabular {
+  text-align: center;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  position: relative;
+}
+
+table.tabular {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  position: relative;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+/* Table hover animation */
+table.tabular:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: var(--box-shadow-hover);
+}
+
+/* Decorative corner elements for tables */
+table.tabular::before,
+table.tabular::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+table.tabular::before {
+  top: 5px;
+  left: 5px;
+  border-top: 2px solid var(--accent-color);
+  border-left: 2px solid var(--accent-color);
+  transform: translate(-3px, -3px);
+}
+
+table.tabular::after {
+  bottom: 5px;
+  right: 5px;
+  border-bottom: 2px solid var(--accent-color);
+  border-right: 2px solid var(--accent-color);
+  transform: translate(3px, 3px);
+}
+
+table.tabular:hover::before,
+table.tabular:hover::after {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Table cell styling */
+table.tabular td {
+  padding: 0.8em 1.2em;
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  transition: background-color var(--transition-speed) ease, transform var(--transition-speed-fast) ease;
+}
+
+/* Row hover effect */
+table.tabular tr:hover td {
+  background-color: rgba(52, 152, 219, 0.15);
+  transform: translateX(3px);
+}
+
+/* Cell hover ripple effect */
+table.tabular td:hover::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(52, 152, 219, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+  animation: ripple 1s ease-out;
+}
+
+table.tabular td p {margin-top: 0em;}
+td p:first-child {margin-top: 0em;}
+td p:last-child {margin-bottom: 0em;}
+
+/* Table cell spacing */
+div.td00 {margin-left: 0pt; margin-right: 0pt;}
+div.td01 {margin-left: 0pt; margin-right: 5pt;}
+div.td10 {margin-left: 5pt; margin-right: 0pt;}
+div.td11 {margin-left: 5pt; margin-right: 5pt;}
+
+table[rules] {
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+td.td00 {padding-left: 0.5em; padding-right: 0.5em;}
+td.td01 {padding-left: 0.5em; padding-right: 1em;}
+td.td10 {padding-left: 1em; padding-right: 0.5em;}
+td.td11 {padding-left: 1em; padding-right: 1em;}
+/* Line styling */
+.hline hr, .cline hr { 
+  height: 0px; 
+  margin: 0px; 
+}
+
+.hline td, .cline td { padding: 0; }
+
+.hline hr, .cline hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+}
+
+.hline {
+  border-top: 1px solid var(--border-color);
+}
+
+.hline + .vspace:last-child {display: none;}
+.tabbing-right {text-align: right;}
+
+/* Figure and float styling */
+div.float, div.figure {
+  margin-left: auto; 
+  margin-right: auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  box-shadow: var(--box-shadow);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+div.float:hover, div.figure:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+div.float img, div.figure img {
+  text-align: center;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Margin notes styling */
+.marginpar, .reversemarginpar {
+  width: 20%; 
+  float: right; 
+  text-align: left; 
+  margin-left: auto; 
+  margin-top: 0.5em; 
+  font-size: 85%; 
+  padding: 0.8em;
+  background-color: rgba(52, 152, 219, 0.05);
+  border-left: 3px solid var(--secondary-color);
+  border-radius: 0 4px 4px 0;
+  box-shadow: var(--box-shadow);
+}
+
+.marginpar p, .reversemarginpar p {
+  margin-top: 0.4em; 
+  margin-bottom: 0.4em;
+}
+
+.reversemarginpar {
+  float: left;
+  border-left: none;
+  border-right: 3px solid var(--secondary-color);
+  border-radius: 4px 0 0 4px;
+}
+
+/* Math equation styling with animations */
+table.equation {width: 100%;}
+.equation td {text-align: center;}
+td.equation { margin-top: 1em; margin-bottom: 1em; } 
+td.equation-label { width: 5%; text-align: center; }
+td.eqnarray4 { width: 5%; white-space: normal; }
+td.eqnarray2 { width: 5%; }
+table.eqnarray-star, table.eqnarray {width: 100%;}
+
+div.eqnarray {
+  text-align: center;
+  margin: 1.5em 0;
+  padding: 1em;
+  overflow-x: auto;
+  transition: transform var(--transition-speed) ease, background-color var(--transition-speed) ease;
+}
+
+div.eqnarray:hover {
+  background-color: rgba(52, 152, 219, 0.05);
+  transform: scale(1.02);
+}
+
+div.array {text-align: center;}
+
+/* Math highlighting effects */
+.math {
+  transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
+  display: inline-block;
+}
+
+.math-highlight, .math:hover {
+  color: var(--accent-color);
+  transform: scale(1.05);
+  text-shadow: 0 0 3px rgba(231, 76, 60, 0.2);
+}
+
+/* Add a subtle pulse animation to math symbols */
+@keyframes mathPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.math.math-highlight {
+  animation: mathPulse 1s ease-in-out;
+}
+
+/* Matrix styling with animations */
+div.pmatrix {
+  text-align: center;
+  margin: 1.5em 0;
+  padding: 1em;
+  overflow-x: auto;
+  transition: transform var(--transition-speed) ease;
+}
+
+div.pmatrix:hover {
+  transform: scale(1.02);
+}
+
+table.pmatrix {width: 100%;}
+span.pmatrix img {vertical-align: middle;}
+span.bar-css {text-decoration: overline;}
+img.cdots {vertical-align: middle;}
+
+/* Table of contents styling */
+.partToc a, .partToc, .likepartToc a, .likepartToc {
+  line-height: 200%; 
+  font-weight: bold; 
+  font-size: 110%;
+  color: var(--heading-color);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.partToc a:hover, .likepartToc a:hover {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+.index-item, .index-subitem, .index-subsubitem {display: block}
+
+/* Caption styling */
+div.caption {
+  text-indent: -2em; 
+  margin-left: 3em; 
+  margin-right: 1em; 
+  text-align: center; 
+  margin-top: 0.8rem;
+  font-style: italic;
+  color: var(--text-color);
+  opacity: 0.9;
+}
+
+div.caption span.id {
+  font-weight: bold; 
+  white-space: nowrap; 
+  color: var(--accent-color);
+}
+
+h1.partHead {text-align: center}
+
+/* Bibliography styling */
+p.bibitem { 
+  text-indent: -2em; 
+  margin-left: 2em; 
+  margin-top: 0.8em; 
+  margin-bottom: 0.8em; 
+}
+
+p.bibitem-p { 
+  text-indent: 0em; 
+  margin-left: 2em; 
+  margin-top: 0.8em; 
+  margin-bottom: 0.8em; 
+}
+
+/* Section heading styling */
+.subsubsectionHead, .likesubsubsectionHead { 
+  font-size: 1em; 
+  color: var(--heading-color);
+}
+
+.paragraphHead, .likeparagraphHead { 
+  margin-top: 2em; 
+  font-weight: bold;
+  color: var(--heading-color);
+}
+
+.subparagraphHead, .likesubparagraphHead { 
+  font-weight: bold;
+  color: var(--heading-color);
+}
+
+.verse {
+  white-space: nowrap; 
+  margin-left: 2em;
+  font-style: italic;
+}
+
+/* Enhanced title styling with decorative elements and animations */
+div.maketitle {
+  text-align: center;
+  margin-bottom: 3em;
+  padding: 2em 1em 2.5em;
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1.2s ease-in-out;
+  background: linear-gradient(to bottom, transparent, rgba(var(--doodle-color-1), 0.03), transparent);
+}
+
+/* Mathematical doodles in the title section */
+div.maketitle::before,
+div.maketitle::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.03;
+  background-image: 
+    radial-gradient(circle at 10% 20%, var(--doodle-color-1) 1px, transparent 1px),
+    radial-gradient(circle at 90% 80%, var(--doodle-color-3) 1px, transparent 1px),
+    radial-gradient(circle at 30% 90%, var(--doodle-color-2) 1px, transparent 1px),
+    radial-gradient(circle at 70% 10%, var(--doodle-color-4) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, var(--doodle-color-5) 1px, transparent 1px);
+  background-size: 100px 100px;
+  animation: rotateDoodles 120s linear infinite;
+}
+
+div.maketitle::after {
+  background-image: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ctext x='5' y='20' font-family='serif' font-size='20' fill='%233498db'%3E∑%3C/text%3E%3Ctext x='25' y='30' font-family='serif' font-size='15' fill='%23e74c3c'%3E∫%3C/text%3E%3Ctext x='20' y='15' font-family='serif' font-size='18' fill='%232ecc71'%3E∏%3C/text%3E%3C/svg%3E");
+  background-size: 100px 100px;
+  opacity: 0.05;
+  animation: rotateDoodles 180s linear infinite reverse;
+}
+
+@keyframes rotateDoodles {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Title heading with enhanced styling */
+h2.titleHead {
+  text-align: center;
+  color: var(--heading-color);
+  margin-bottom: 0.8em;
+  font-size: 2.5em;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+  position: relative;
+  display: inline-block;
+  animation: titleAppear 1.5s ease-out;
+}
+
+/* Decorative underline for title */
+h2.titleHead::after {
+  content: '';
+  position: absolute;
+  width: 80%;
+  height: 3px;
+  bottom: -10px;
+  left: 10%;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+  animation: expandWidth 1.5s ease-out forwards;
+}
+
+@keyframes titleAppear {
+  0% { opacity: 0; transform: scale(0.95); }
+  30% { opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@keyframes expandWidth {
+  from { width: 0; left: 50%; }
+  to { width: 80%; left: 10%; }
+}
+
+/* Author and date styling */
+div.author, div.date {
+  text-align: center;
+  margin-top: 0.8em;
+  animation: slideUp 1s ease-out;
+  animation-fill-mode: both;
+}
+
+div.author {
+  animation-delay: 0.3s;
+}
+
+div.date {
+  animation-delay: 0.5s;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+div.thanks {
+  text-align: left; 
+  margin-left: 10%; 
+  font-size: 85%; 
+  font-style: italic; 
+  color: var(--secondary-color);
+  animation: fadeIn 1s ease-in-out;
+  animation-delay: 0.8s;
+  animation-fill-mode: both;
+}
+
+div.author {
+  white-space: nowrap;
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+}
+
+/* Decorative elements around author name */
+div.author::before,
+div.author::after {
+  content: '—';
+  color: var(--accent-color);
+  opacity: 0.7;
+  position: relative;
+  top: -2px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+div.author::before {
+  margin-right: 10px;
+}
+
+div.author::after {
+  margin-left: 10px;
+}
+
+/* Abstract styling */
+div.abstract p {
+  margin-left: 5%; 
+  margin-right: 5%;
+  line-height: 1.6;
+}
+
+div.abstract {
+  width: 100%;
+  background-color: rgba(52, 152, 219, 0.05);
+  padding: 1.5em;
+  border-radius: 4px;
+  margin: 2em 0;
+}
+
+.abstracttitle {
+  text-align: center;
+  margin-bottom: 1em;
+  font-weight: bold;
+  color: var(--heading-color);
+}
+
+/* TOC indentation */
+.subsectionToc, .likesubsectionToc {margin-left: 1.5em;}
+.subsubsectionToc, .likesubsubsectionToc {margin-left: 3em;}
+.paragraphToc, .likeparagraphToc {margin-left: 4.5em;}
+.subparagraphToc, .likesubparagraphToc {margin-left: 6em;}
+
+/* Figure styling */
+figure.float, div.figure {
+  margin-left: auto; 
+  margin-right: auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+figure.figure {text-align: center;}
+
+figcaption.caption {
+  text-indent: -2em; 
+  margin-left: 3em; 
+  margin-right: 1em; 
+  text-align: center;
+  font-style: italic;
+  color: var(--text-color);
+  opacity: 0.9;
+  padding-top: 0.5em;
+}
+
+figcaption.caption span.id {
+  font-weight: bold; 
+  white-space: nowrap; 
+  color: var(--accent-color);
+}
+
+p + figcaption, img + figcaption {margin-top: 1em;}
+
+/* Bibliography grid */
+.thebibliography dl { 
+  display: grid; 
+  grid-auto-columns: min-content 1fr; 
+  grid-auto-flow: column; 
+  margin: 1.5em 0;
+}
+
+.thebibliography dt { 
+  grid-column: 1; 
+  margin-bottom: 0.8em; 
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.abstract {margin: 1.5em;}
+.rotatebox {display: inline-block;}
+
+/* Math alignment tables */
+.equation td {text-align: center;}
+.equation-star td {text-align: center;}
+table.equation-star {width: 100%;}
+table.equation {width: 100%;}
+
+table.align, table.alignat, table.xalignat, table.xxalignat, table.flalign {
+  width: 95%; 
+  margin-left: 5%; 
+  white-space: nowrap;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+table.align-star, table.alignat-star, table.xalignat-star, table.flalign-star {
+  margin-left: auto; 
+  margin-right: auto; 
+  white-space: nowrap;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+td.align-label {width: 5%; text-align: center;}
+td.align-odd {text-align: right; padding-right: 0.5em;}
+td.align-even {text-align: left; padding-right: 0.8em;}
+table.multline, table.multline-star {width: 100%;}
+td.gather {text-align: center;}
+table.gather {width: 100%;}
+div.gather-star {text-align: center;}
+
+/* Responsive design for smaller screens */
+/* Tablet Styles */
+@media screen and (max-width: 1024px) {
+  body {
+    max-width: 95%;
+    padding: 0 1.5em;
+    font-size: 17px;
+  }
+  
+  /* Reduce decorative elements */
+  body::before,
+  body::after {
+    width: 150px;
+    height: 150px;
+    opacity: 0.02;
+  }
+  
+  /* Adjust title section */
+  h2.titleHead {
+    font-size: 2em;
+  }
+  
+  /* Adjust heading sizes */
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.7em; }
+  h3 { font-size: 1.4em; }
+  
+  /* Adjust theorem and proof spacing */
+  .newtheorem, .proof {
+    padding: 1em 1.5em;
+  }
+  
+  /* Adjust table display */
+  div.tabular, table.tabular {
+    max-width: 100%;
+    overflow-x: auto;
+    display: block;
+  }
+  
+  /* Adjust math display */
+  div.par-math-display, div.math-display {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  /* Adjust margin notes */
+  .marginpar, .reversemarginpar {
+    width: 100%;
+    float: none;
+    margin: 1em 0;
+    box-shadow: var(--box-shadow);
+    padding: 0.8em;
+    border-radius: var(--border-radius-sm);
+    background-color: rgba(52, 152, 219, 0.05);
+  }
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 0 1em;
+    font-size: 16px;
+    margin: 1em auto;
+  }
+  
+  /* Further reduce decorative elements */
+  body::before,
+  body::after {
+    width: 100px;
+    height: 100px;
+    opacity: 0.01;
+  }
+  
+  /* Adjust title section for mobile */
+  div.maketitle {
+    margin-bottom: 2em;
+  }
+  
+  h2.titleHead {
+    font-size: 1.8em;
+    text-align: center;
+  }
+  
+  div.author, div.date {
+    text-align: center;
+    display: block;
+  }
+  
+  /* Adjust heading sizes and margins */
+  h1, h2, h3, h4, h5 {
+    margin-top: 1.2em;
+    margin-bottom: 0.5em;
+  }
+  
+  h1 { font-size: 1.8em; }
+  h2 { font-size: 1.5em; }
+  h3 { font-size: 1.3em; }
+  h4 { font-size: 1.2em; }
+  h5 { font-size: 1.1em; }
+  
+  /* Adjust section headings */
+  .partHead, .likepartHead { font-size: 1.7em; }
+  .chapterHead, .likechapterHead { font-size: 1.5em; }
+  .sectionHead, .likesectionHead { font-size: 1.3em; }
+  .subsectionHead, .likesubsectionHead { font-size: 1.2em; }
+  
+  /* Adjust theorem and proof styling */
+  .newtheorem, .proof {
+    padding: 0.8em 1em 0.8em 1.5em;
+    margin: 1.5em 0;
+  }
+  
+  /* Simplify theorem decorative corners */
+  .newtheorem::before {
+    border-width: 0 20px 20px 0;
+  }
+  
+  /* Adjust code blocks */
+  pre.verbatim {
+    padding: 1em;
+    font-size: 0.9em;
+  }
+  
+  pre.verbatim::before {
+    width: 30px;
+  }
+  
+  /* Adjust table display */
+  table.tabular td {
+    padding: 0.5em;
+  }
+  
+  /* Adjust TOC indentation */
+  .subsectionToc { margin-left: 1em; }
+  .subsubsectionToc { margin-left: 2em; }
+  .paragraphToc { margin-left: 3em; }
+  
+  /* Adjust abstract */
+  div.abstract {
+    padding: 1em;
+  }
+  
+  div.abstract p {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  /* Adjust figure captions */
+  figcaption.caption {
+    text-indent: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  /* Adjust scroll-to-top button */
+  .scroll-to-top {
+    width: 35px;
+    height: 35px;
+    bottom: 15px;
+    right: 15px;
+  }
+  
+  /* Adjust link hover effects */
+  a:hover {
+    transform: none;
+  }
+  
+  /* Simplify animations for better performance */
+  .newtheorem:hover, .proof:hover, pre.verbatim:hover, .fbox:hover, .framebox-c:hover, .framebox-l:hover, .framebox-r:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* Adjust mathematical content for mobile */
+  div.par-math-display, div.math-display {
+    font-size: 0.95em;
+    padding: 0.5em 0;
+    overflow-x: auto;
+  }
+  
+  /* Adjust equation arrays */
+  div.eqnarray {
+    overflow-x: auto;
+    padding: 0.5em 0;
+  }
+  
+  /* Adjust math tables */
+  table.align, table.alignat, table.xalignat, table.xxalignat, table.flalign {
+    width: 100%;
+    margin-left: 0;
+    overflow-x: auto;
+    display: block;
+  }
+  
+  /* Adjust inline math */
+  .math {
+    font-size: 0.95em;
+  }
+  
+  /* Adjust math highlighting */
+  .math-highlight {
+    padding: 0 3px;
+  }
+  
+  /* Improve touch targets for links and interactive elements */
+  a, button, .scroll-to-top {
+    padding: 0.2em;
+  }
+  
+  /* Adjust animated underlines for links */
+  a:not(.partToc a):not(.likepartToc a):not([id])::after {
+    height: 1px;
+    bottom: -1px;
+  }
+}
+
+/* Small Mobile Styles */
+@media screen and (max-width: 480px) {
+  body {
+    padding: 0 0.8em;
+    font-size: 15px;
+    margin: 0.8em auto;
+    max-width: 100%;
+  }
+  
+  /* Minimize decorative elements */
+  body::before,
+  body::after {
+    display: none;
+  }
+  
+  /* Further adjust title section */
+  h2.titleHead {
+    font-size: 1.6em;
+  }
+  
+  div.title-doodle-container {
+    display: none; /* Hide decorative title doodles on very small screens */
+  }
+  
+  /* Further adjust heading sizes */
+  h1 { font-size: 1.6em; }
+  h2 { font-size: 1.4em; }
+  h3 { font-size: 1.2em; }
+  
+  /* Simplify theorem styling */
+  .newtheorem, .proof {
+    padding: 0.7em 0.9em;
+    border-radius: var(--border-radius-sm);
+  }
+  
+  /* Remove some decorative elements */
+  .newtheorem::before {
+    border-width: 0 15px 15px 0;
+  }
+  
+  /* Simplify code blocks */
+  pre.verbatim::before {
+    display: none;
+  }
+  
+  pre.verbatim::after {
+    font-size: 0.6em;
+    padding: 0.1em 0.5em;
+  }
+  
+  /* Adjust math display for very small screens */
+  div.par-math-display, div.math-display {
+    padding: 0.3em;
+    font-size: 0.9em;
+  }
+  
+  /* Simplify table styling */
+  table.tabular td {
+    padding: 0.4em;
+  }
+  
+  /* Adjust images */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Simplify table corners */
+  table.tabular::before,
+  table.tabular::after,
+  table.tabular td::after {
+    display: none; /* Hide decorative corners on small screens */
+  }
+  
+  /* Adjust TOC for small screens */
+  div.tableofcontents {
+    padding: 0.5em;
+    font-size: 0.9em;
+  }
+  
+  /* Improve readability of math on small screens */
+  .math, .cmmi-10, .cmr-17, .cmr-12 {
+    font-size: 95%;
+  }
+  
+  /* Adjust bibliography for small screens */
+  .thebibliography dt {
+    margin-bottom: 0.5em;
+  }
+  
+  /* Ensure buttons are easy to tap */
+  .scroll-to-top {
+    width: 40px;
+    height: 40px;
+  }
+  
+  /* Ensure links are easy to tap */
+  a {
+    padding: 0.3em 0;
+    display: inline-block;
+  }
+  
+  /* Simplify animations further for performance */
+  * {
+    animation-duration: 0.3s !important;
+  }
+  
+  /* Adjust spacing for better mobile reading */
+  p, li {
+    line-height: 1.5;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    font-size: 12pt;
+    color: #000;
+    background-color: #fff;
+  }
+  
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+  
+  div.float, div.figure, div.newtheorem, .proof {
+    page-break-inside: avoid;
+  }
+  
+  h1, h2, h3, h4, h5 {
+    page-break-after: avoid;
+  }
+  
+  div.maketitle {
+    border-bottom: 1pt solid #000;
+  }
+}
+
+/* end css.sty */
+

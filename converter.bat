@@ -1,0 +1,1 @@
+make4ht -u -f html5 main.tex "mathjax"

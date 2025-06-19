@@ -1,0 +1,113 @@
+<!DOCTYPE html> 
+<html lang='en-US' xml:lang='en-US'> 
+<head><title>Isomorphism Between Sn and Normaliser of Simultaneously Diagonalisable
+Matrices</title> 
+<meta charset='utf-8' /> 
+<meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
+<meta content='width=device-width,initial-scale=1' name='viewport' /> 
+<link href='main.css' rel='stylesheet' type='text/css' /> 
+<meta content='main.tex' name='src' /> 
+<script>window.MathJax = { 
+  tex: { tags: "ams", inlineMath: [ ["$","$"], ["\\(","\\)"] ] },
+  startup: {
+    ready: function() {
+      MathJax.startup.defaultReady();
+      // Add math-class to all MathJax elements after rendering
+      MathJax.startup.promise.then(function() {
+        document.querySelectorAll('.MathJax').forEach(function(el) {
+          el.classList.add('math');
+        });
+      });
+    }
+  }
+};</script>
+<script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js' type='text/javascript'></script>
+<script src='main.js' defer></script>
+</head><body>
+   <div class='maketitle'>
+
+
+
+<h2 class='titleHead'>Isomorphism Between <span class='mathjax-inline'>\(S_n\)</span> and Normaliser of
+Simultaneously Diagonalisable Matrices</h2>
+ <div class='author'><span class='cmr-12'>ATRAJIT SARKAR</span></div><br />
+<div class='date'><span class='cmr-12'>March 2025</span></div>
+   </div>
+   <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
+   <div class='tableofcontents'>
+   <span class='sectionToc'>1 <a href='#introduction' id='QQ2-1-2'>Introduction</a></span>
+<br />   <span class='subsectionToc'>1.1 <a href='#prerequisites' id='QQ2-1-3'>Prerequisites</a></span>
+<br />   <span class='subsectionToc'>1.2 <a href='#important-results' id='QQ2-1-4'>Important Results</a></span>
+<br />   <span class='sectionToc'>2 <a href='#main-result' id='QQ2-1-5'>Main Result</a></span>
+   </div>
+
+   
+   <h3 class='sectionHead' id='introduction'><span class='titlemark'>1   </span> <a id='x1-20001'></a>Introduction</h3>
+   
+   <h4 class='subsectionHead' id='prerequisites'><span class='titlemark'>1.1   </span> <a id='x1-30001.1'></a>Prerequisites</h4>
+     <ul class='itemize1'>
+     <li class='itemize'>Definition of Groups
+     </li>
+     <li class='itemize'>Isomorphism of Groups
+     </li>
+     <li class='itemize'>Idea about Vector spaces and basis
+     </li>
+     <li class='itemize'>idea about linear operator and its matrix form in different basis
+     </li>
+     <li class='itemize'>an idea about how changing basis affects the matrix representation of a
+     linear operator.</li></ul>
+   
+   <h4 class='subsectionHead' id='important-results'><span class='titlemark'>1.2   </span> <a id='x1-40001.2'></a>Important Results</h4>
+<!-- l. 45 --><p class='noindent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-4002x1'><span class='cmbx-10'>Simultaneous Diagonalization</span>:<br class='newline' />Consider a commutating family <span class='mathjax-inline'>\(\mathcal {F}\subseteq M_n(\mathbb {C})\)</span> of diagonalizable operators, then there
+     exists a basis of <span class='mathjax-inline'>\(\mathbb {C}^n\)</span> where <span class='mathjax-inline'>\(\mathcal {F}\)</span> is a diagonal matrix family.
+
+     </li>
+<li class='enumerate' id='x1-4004x2'>
+     <!-- l. 49 --><p class='noindent'><span class='cmbx-10'>Normaliser of Diagonal Matrices</span>:<br class='newline' />Let <span class='mathjax-inline'>\(\mathbb {D}\subseteq GL_n(\mathbb {C})\)</span> be a family of diagonalizable operators. Then <span class='mathjax-inline'>\(N_{GL_n(\mathbb {C})}(\mathbb {D})\)</span> the normaliser of <span class='mathjax-inline'>\(\mathbb {D}\)</span> in <span class='mathjax-inline'>\(GL_n(\mathbb {C})\)</span>
+     is the set of all matrices
+     </p><!-- l. 52 --><p class='noindent'>
+     </p><div class='mathjax-block'>
+                                   \[\left \{P\in GL_n(\mathbb {C}): P= \begin {pmatrix} |&amp;|&amp;\cdots&amp; |\\ c_1e_{\sigma (1)}&amp;c_2e_{\sigma (2)}&amp;\cdots&amp;c _ne_{\sigma (n)}\\ |&amp;|&amp;\cdots&amp; | \end {pmatrix}=P_{\sigma ,\{c_i\}}, \sigma \in S_n,c_i\in \mathbb {C}\setminus \{0\} \right \}\]
+     </div>
+     </li>
+<li class='enumerate' id='x1-4006x3'>
+     <!-- l. 60 --><p class='noindent'><span class='cmbx-10'>Changing basis is a automorphism</span>:<br class='newline' />Actually changing basis of the <span class='mathjax-inline'>\(\mathbb {C}^n\)</span> does a automorphism on <span class='mathjax-inline'>\(GL_n(\mathbb {C})\)</span> via </p><div class='mathjax-block'>\[ \begin {aligned} \phi : GL_n(\mathbb {C}) &amp;\to GL_n(\mathbb {C}) \\ A &amp;\mapsto P^{-1} A P \end {aligned} \]</div>
+     </li>
+<li class='enumerate' id='x1-4008x4'>
+     <!-- l. 69 --><p class='noindent'><span class='cmbx-10'>The above automorphism extended to a isomporphism</span>:<br class='newline' />The above automorphism gets extended to a isomophism between </p><div class='mathjax-block'>\[ \left ( \frac {N(P^{-1}\mathbb {D}P) }{P^{-1}\mathbb {D}P } \right )\cong \frac {N(\mathbb {D})}{\mathbb {D}} \]</div>
+     </li></ol>
+<!-- l. 77 --><p class='noindent'>
+
+   
+</p>
+   <h3 class='sectionHead' id='main-result'><span class='titlemark'>2   </span> <a id='x1-50002'></a>Main Result</h3>
+   <div class='newtheorem'>
+<!-- l. 80 --><p class='noindent'><span class='head'>
+<a id='x1-5001r1'></a>
+<span class='cmbx-10'>Theorem 1.</span>  </span><span class='cmti-10'>If </span><span class='mathjax-inline'>\(\mathbb {D}\subseteq GL_n(\mathbb {C})\) </span><span class='cmti-10'>be the set of all commutating diagonalisable operators and </span><span class='mathjax-inline'>\(N(\mathbb {D})\) </span><span class='cmti-10'>be
+the normaliser of </span><span class='mathjax-inline'>\(\mathbb {D}\) </span><span class='cmti-10'>in </span><span class='mathjax-inline'>\(GL_n(\mathbb {C})\) </span><span class='cmti-10'>then </span><span class='mathjax-inline'>\(\frac {N(\mathbb {D})}{\mathbb {D}}\cong S_n\)</span><span class='cmti-10'>.</span>
+</p>
+   </div>
+<!-- l. 82 --><p class='indent'>
+</p>
+   <div class='proof'>
+<!-- l. 85 --><p class='indent'>   <span class='head'>
+<span class='cmti-10'>Proof.</span> </span>By Important Results 1, we have a basis <span class='mathjax-inline'>\(\mathcal {B}\)</span> in which <span class='mathjax-inline'>\(D\)</span> is a diagonal family.
+Let <span class='mathjax-inline'>\(\mathcal {B}=\{v_1,v_2,\cdots v_n\}\)</span> then by important result 2 we have <span class='mathjax-inline'>\(N(\mathbb {D})\)</span> is of that special form.<br class='newline' />Now, define,
+</p><div class='mathjax-block'>
+                                 \[\phi : N(\mathbb {D})\rightarrow S_n\]
+</div> by <span class='mathjax-inline'>\(\phi (P_{\sigma ,\{c_i\}})=\sigma \)</span> by Important Result 2. Now, this is easily homomorphism as <span class='mathjax-inline'>\(\phi (P_{\sigma ,\{c_i\}}P_{\tau ,\{d_i\}})=\phi (P_{\sigma \circ \tau ,\{c_id_i\}})=\sigma \circ \tau = \phi (P_{\sigma ,\{c_i\}}) \circ \phi (P_{\tau ,\{d_i\}})\)</span>.<br class='newline' />
+<!-- l. 91 --><p class='indent'>   By Important Result 2 also we have <span class='mathjax-inline'>\(\phi \)</span> is onto. <br class='newline' />
+</p><!-- l. 93 --><p class='indent'>   <span class='cmbx-10'>Notice: </span><span class='mathjax-inline'>\(\operatorname {Ker}(\phi )=\mathbb {D}\)</span>, as we can write <span class='mathjax-inline'>\(\mathbb {D}=\{P_{id,\{c_i\}}: c_i\in \mathbb {C}\setminus \{0\}\}\)</span>, here <span class='mathjax-inline'>\(id \in S_n\)</span> is the identity permutation.<br class='newline' />
+</p><!-- l. 95 --><p class='indent'>   Hence by 1st isomorphism theorem we have, <span class='mathjax-inline'>\(\frac {N(\mathbb {D})}{\mathbb {D}}\cong S_n\)</span>.<br class='newline' />
+
+</p><!-- l. 97 --><p class='indent'>   Finally, use Important result 4 and make it isomorphic to the group w.r.t.
+any basis. Hence choice of basis is just redundant for the proof. It is just to
+make the life simplier for the proof.                                                       □
+</p>
+   </div>
+    
+</body> 
+</html>

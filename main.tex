@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+
+% Define theorem environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+% Define definition-like environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+% Define remark-like environments
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+
+\title{Isomorphism Between $S_n$ and Normaliser of Simultaneously Diagonalisable Matrices}
+\author{ATRAJIT SARKAR}
+\date{March 2025}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction}
+\subsection{Prerequisites}
+\begin{itemize}
+    \item Definition of Groups
+    \item Isomorphism of Groups
+    \item Idea about Vector spaces and basis
+    \item idea about linear operator and its matrix form in different basis
+    \item an idea about how changing basis affects the matrix representation of a linear operator.
+\end{itemize}
+
+\subsection{Important Results}
+\begin{enumerate}
+    \item \textbf{Simultaneous Diagonalization}:\\
+    Consider a commutating family $\mathcal{F}\subseteq M_n(\mathbb{C})$ of diagonalizable operators, then there exists a basis of $\mathbb{C}^n$ where $\mathcal{F}$ is a diagonal matrix family.
+
+    \item \textbf{Normaliser of Diagonal Matrices}:\\
+    Let $\mathbb{D}\subseteq GL_n(\mathbb{C})$ be a family of diagonalizable operators. Then $N_{GL_n(\mathbb{C})}(\mathbb{D})$ the normaliser of $\mathbb{D}$ in $GL_n(\mathbb{C})$ is the set of all matrices 
+    
+    $$\left\{P\in GL_n(\mathbb{C}): P=
+    \begin{pmatrix}
+        |&|&\cdots&|\\
+        c_1e_{\sigma(1)}&c_2e_{\sigma(2)}&\cdots&c_ne_{\sigma(n)}\\
+        |&|&\cdots&|
+    \end{pmatrix}=P_{\sigma,\{c_i\}}, \sigma \in S_n,c_i\in \mathbb{C}\setminus \{0\}
+    \right\}$$
+
+    \item \textbf{Changing basis is a automorphism}:\\
+    Actually changing basis of the $\mathbb{C}^n$ does a automorphism on $GL_n(\mathbb{C})$ via 
+    \[
+\begin{aligned}
+    \phi: GL_n(\mathbb{C}) &\to GL_n(\mathbb{C}) \\
+    A &\mapsto P^{-1} A P
+\end{aligned}
+\]
+
+\item \textbf{The above automorphism extended to a isomporphism}:\\
+The above automorphism gets extended to a isomophism between 
+\[
+ \left( \frac{N(P^{-1}\mathbb{D}P) }{P^{-1}\mathbb{D}P } \right)\cong \frac{N(\mathbb{D})}{\mathbb{D}}
+\]
+
+\end{enumerate}
+
+\newpage
+
+\section{Main Result}
+\begin{theorem}
+    If $\mathbb{D}\subseteq GL_n(\mathbb{C})$ be the set of all commutating diagonalisable operators and $N(\mathbb{D})$ be the normaliser of $\mathbb{D}$ in $GL_n(\mathbb{C})$ then $\frac{N(\mathbb{D})}{\mathbb{D}}\cong S_n$.
+    \end{theorem}
+
+    \begin{proof}
+        By Important Results 1, we have a basis $\mathcal{B}$ in which $D$ is a diagonal family. Let $\mathcal{B}=\{v_1,v_2,\cdots v_n\}$ then by important result 2 
+        we have $N(\mathbb{D})$ is of that special form.\\
+        Now, define,
+        $$\phi : N(\mathbb{D})\rightarrow S_n$$ by $\phi(P_{\sigma,\{c_i\}})=\sigma$
+        by Important Result 2. Now, this is easily homomorphism as $\phi(P_{\sigma,\{c_i\}}P_{\tau,\{d_i\}})=\phi (P_{\sigma \circ \tau,\{c_id_i\}})=\sigma \circ \tau = \phi(P_{\sigma,\{c_i\}}) \circ \phi(P_{\tau,\{d_i\}})$.\\
+
+        By Important Result 2 also we have $\phi$ is onto. \\
+
+        \textbf{Notice:} $\operatorname{Ker}(\phi)=\mathbb{D}$, as we can write $\mathbb{D}=\{P_{id,\{c_i\}}: c_i\in \mathbb{C}\setminus \{0\}\}$, here $id \in S_n$ is the identity permutation.\\
+
+        Hence by 1st isomorphism theorem we have, $\frac{N(\mathbb{D})}{\mathbb{D}}\cong S_n$.\\
+
+        Finally, use Important result 4 and make it isomorphic to the group w.r.t. any basis. Hence choice of basis is just redundant for the proof. It is just to make the life simplier for the proof.
+    \end{proof}
+\end{document}
